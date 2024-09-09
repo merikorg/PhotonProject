@@ -1,15 +1,13 @@
 const express = require('express');
 const axios = require('axios');
-const cors = require('cors');  // Importar cors
+const cors = require('cors');  
 const app = express();
 const port = 3000;
 
-// Habilitar CORS para todas las solicitudes
 app.use(cors());
 
 app.use(express.json());
 
-// Ruta para manejar la búsqueda
 app.get('/api/search-place', async (req, res) => {
   const query = req.query.q;
   if (!query) {
@@ -17,7 +15,6 @@ app.get('/api/search-place', async (req, res) => {
   }
 
   try {
-    // Hacer la solicitud a la API de Photon
     const response = await axios.get(`https://photon.komoot.io/api/?q=${encodeURIComponent(query)}`);
     res.json(response.data);
   } catch (error) {
@@ -26,7 +23,6 @@ app.get('/api/search-place', async (req, res) => {
   }
 });
 
-// Iniciar el servidor
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });
