@@ -1,0 +1,19 @@
+<div class="search-container">
+  <input 
+    [(ngModel)]="searchQuery" 
+    (input)="onInputChange()" 
+    placeholder="Buscar un lugar" 
+    (blur)="hideSuggestions()" 
+    (focus)="onFocus()"
+    autocomplete="off"
+  />
+  
+  <ul class="suggestions" *ngIf="showSuggestions && suggestions.length > 0">
+    <li 
+      *ngFor="let suggestion of suggestions; let i = index"
+      (click)="selectSuggestion(suggestion)"
+      [class.selected]="i === selectedIndex">
+      {{ suggestion.properties.name }} - {{ suggestion.properties.city || '' }} {{ suggestion.properties.country || '' }}
+    </li>
+  </ul>
+</div>
